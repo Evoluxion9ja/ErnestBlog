@@ -19,7 +19,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        $posts = Post::orderBy('id', 'desc')->get();
+        return view('publish.index',[
+            'posts' => $posts
+        ]);
     }
 
     /**

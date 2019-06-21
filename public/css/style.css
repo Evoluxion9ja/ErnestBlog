@@ -21,6 +21,7 @@ span.divide-line{
 }
 .card{
     border-radius: 0;
+    padding: 10px;
 }
 .modal-dialog{
     max-width: 700px;
@@ -28,4 +29,9 @@ span.divide-line{
 }
 .modal-content{
     border-radius: 0;
+}
+.major-small{
+    background: #095973;
+    color: #fff;
+    padding: 5px 10px;
 }
