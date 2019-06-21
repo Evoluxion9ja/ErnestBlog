@@ -19,7 +19,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        $categories = Category::all();
+        return view('categories.index', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -59,7 +62,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $categories = Category::find($id);
+        return view('categories.show', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -82,7 +88,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2|max:255'
+        ]);
+
+        $categories = Category::find($id);
+        $categories->name = $request->input('name');
+        $categories->save();
+
+        return redirect()->route('category.show', $categories->id)->withSuccess('Category successfully updated');
     }
 
     /**

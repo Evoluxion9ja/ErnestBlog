@@ -38,6 +38,39 @@
                         </div>
                     {!! Form::close() !!}
                 </div>
+                <div class="col-md-12">
+                    <hr>
+                    <table class="table table-bordered table-dark">
+                        <thead>
+                            <th><small><strong>Id</strong></small></th>
+                            <th><small><strong>Category</strong></small></th>
+                            <th><small><strong>Post Count</strong></small></th>
+                            <th><small><strong>Created AT</strong></small></th>
+                            <th><small><strong>Action</strong></small></th>
+                        </thead>
+                        <tbody>
+                            @foreach ($categories as $category)
+                                <tr>
+                                    <th><small><strong>{{$category->id}}</strong></small></th>
+                                    <td><small>{{$category->name}}</small></td>
+                                    <td><small>{{$category->posts()->count()}}
+                                        @if (count($category->posts) > 0)
+                                            {{(__('Articles'))}}
+                                            @else {{(__('Article'))}}
+                                        @endif
+                                    </small></td>
+                                    <td><small>{{date('M j, Y H:i a', strtotime($category->created_at))}}</small></td>
+                                    <td>
+                                        {{Html::linkroute('category.show', 'Details', [$category->id], ['class' => 'btn btn-outline-light btn-sm', 'style' => 'float: left; margin-right:5px;'])}}
+                                        {!! Form::open(['action' => ['CategoryController@destroy', $category->id], 'method' => 'DELETE', 'style' => 'float:left; width:50px;']) !!}
+                                            {{form::submit('Delete', ['class' => 'btn btn-outline-danger btn-sm'])}}
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
