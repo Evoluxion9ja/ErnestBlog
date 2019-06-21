@@ -20,8 +20,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('id', 'desc')->get();
+        $categories = Category::all();
+        $tags = Tag::all();
         return view('publish.index',[
-            'posts' => $posts
+            'posts' => $posts,
+            'categories' => $categories,
+            'tags' => $tags
         ]);
     }
 
@@ -43,7 +47,38 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|min:10|max:255',
+            'slug' => 'required|min:10|max:255',
+            'category_id' => 'required|string',
+            'content' => 'required|min:10',
+            'image' => 'image|nullable|max:2000'
+        ]);
+
+        //Upload of image
+
+        if($request->hasFile('image')){
+            $imageNameWithExtension = $request->file('image')->getClientOriginalName;
+            $imageNameNoExtension = pathinfo($imageNameWithExtension, PATHINFO_FILENAME);
+            $imageExtension = $request->file('image')->getClientOriginalExtension;
+            $imageNameToStore = $imageNameNoExtension.'_'.time().'.'.$imageExtension;
+            $location = $request->file('image').storeAs('public/blog_images', $imageNameToStore);
+        }else{
+            $imageNameToStore = 'no_image.jpg';
+        }
+
+        $posts = new Post;
+        $posts->title = $request->input('title');
+        $posts->slug = $request->input('slug');
+        $posts->category_id = $request->input('category_id');
+        $posts->content = $request->input('content');
+        $posts->image = $imageNameToStore;
+        $posts->user_id = auth()->user()->id;
+        $posts->save();
+
+        $posts->tags()->sync($request->tags, false);
+
+        return redirect()->route('publish.index')->withSuccess('Article Posted Successfully');
     }
 
     /**
@@ -54,7 +89,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('publish.show');
     }
 
     /**
