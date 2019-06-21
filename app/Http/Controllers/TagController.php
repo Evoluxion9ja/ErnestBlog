@@ -19,7 +19,10 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view('tags.index', [
+            'tags' => $tags
+        ]);
     }
 
     /**
@@ -40,7 +43,15 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2|max:255'
+        ]);
+
+        $tags = new Tag;
+        $tags->name = $request->input('name');
+        $tags->save();
+
+        return redirect()->route('tags.index')->withSuccess('Tag successfully Created');
     }
 
     /**
@@ -51,7 +62,10 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        $tags = Tag::find($id);
+        return view('tags.show', [
+            'tags' => $tags
+        ]);
     }
 
     /**
@@ -74,7 +88,15 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2|max:255'
+        ]);
+
+        $tags = Tag::find($id);
+        $tags->name = $request->input('name');
+        $tags->save();
+
+        return redirect()->route('tags.show', $tags->id)->withSuccess('Tag updated Successfully');
     }
 
     /**
@@ -85,6 +107,10 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tags = Tag::find($id);
+        $tags->posts()->detach();
+        $tags->delete();
+
+        return redirect()->route('tags.index')->withSuccess('Tag deleted and detached');
     }
 }
