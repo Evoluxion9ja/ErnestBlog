@@ -12,7 +12,7 @@
                     <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#exampleModal">
                         Start Writing Here
                     </button>
-                    {!! Form::open(['action' => 'PostController@store', 'method' => 'POST', 'data-parsley-validate' => '']) !!}
+                    {!! Form::open(['action' => 'PostController@store', 'method' => 'POST', 'data-parsley-validate' => '', 'enctype' => 'multipart/form-data']) !!}
                         @section('stylesheets')
                             {{Html::style('css/select2.min.css')}}
                         @endsection
@@ -28,11 +28,11 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            {{form::text('title', 'Article Title')}}
+                                            {{form::label('title', 'Article Title')}}
                                             {{form::text('title', '', ['class' => 'form-control', 'required' => '', 'minLength' => '3', 'maxLength' => '255'])}}
                                         </div>
                                         <div class="form-group">
-                                            {{form::text('slug', 'Article Slug')}}
+                                            {{form::label('slug', 'Article Slug')}}
                                             {{form::text('slug', '', ['class' => 'form-control', 'required' => '', 'minLength' => '3', 'maxLength' => '255'])}}
                                         </div>
                                         <div class="form-group">
@@ -64,13 +64,14 @@
                                             {{form::textarea('content', '', ['class' => 'form-control', 'required' => '', 'placeholder' => 'Start to write here'])}}
                                         </div>
                                         <div class="form-group">
+                                            {{form::label('image', 'Article Image')}}
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                  <span class="input-group-text" id="image" name="image">Upload</span>
+                                                  <span class="input-group-text" id="image">Upload</span>
                                                 </div>
                                                 <div class="custom-file">
-                                                  <input type="file" class="custom-file-input" id="image" name="image" aria-describedby="inputGroupFileAddon01">
-                                                  <label class="custom-file-label" for="image">Choose Image</label>
+                                                  <input type="file" class="custom-file-input" name="image" id="image" aria-describedby="inputGroupFileAddon01">
+                                                  <label class="custom-file-label" for="image">Choose file</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,14 +111,18 @@
                 </thead>
                 <tbody>
                     @foreach ($posts as $post)
-                        <th><strong>{{$post->id}}</strong></th>
-                        <td>{{$post->title}}</td>
-                        <td>{{$post->category->name}}</td>
-                        <td>@foreach ($post->tags as $tag)
-                            <div class="badge-pill">{{$tag->name}}</div>
-                        @endforeach</td>
-                        <td>{{date('M j, Y H:i a', strtotime($post->created_at))}}</td>
-                        <td>{{Html::linkroute('publish.show', 'Details', [$post->id], ['class' => 'btn btn-outline-light btn-sm'])}}</td>
+                        <tr>
+                            <th><strong>{{$post->id}}</strong></th>
+                            <td>{{$post->title}}</td>
+                            <td>{{$post->category->name}}</td>
+                            <td>
+                                @foreach ($post->tags as $tag)
+                                    {{$tag->name}}
+                                @endforeach
+                            </td>
+                            <td>{{date('M j, Y H:i a', strtotime($post->created_at))}}</td>
+                            <td>{{Html::linkroute('publish.show', 'Details', [$post->id], ['class' => 'btn btn-outline-light btn-sm'])}}</td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

@@ -29,9 +29,95 @@ span.divide-line{
 }
 .modal-content{
     border-radius: 0;
+    color: #000;
 }
 .major-small{
     background: #095973;
     color: #fff;
     padding: 5px 10px;
+}
+
+figure.intro-image{
+    display: block;
+    color:  #000;
+}
+
+figure.intro-image img{
+    position: relative;
+    max-height: 600px;
+}
+
+.intro-image figcaption{
+    width: 700px;
+    padding: 20px;
+    background: rgba(174, 182, 191, 0.5);
+    box-shadow: 2px 1px 20px 2px #333;
+    position: absolute;
+    top: 200px;
+}
+
+.intro-image figcaption p{
+    color: #000;
+}
+.modal-content p{
+    color: #000;
+}
+
+figure.slider-figure{
+    display: block;
+    color:  #000;
+    max-height: 500px;
+    overflow: hidden;
+    height: 20%;
+}
+
+figure.slider-figure img{
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+figure.slider-figure figcaption{
+    position: absolute;
+    bottom: 100px;
+    width: 800px;
+    background: rgba(174, 182, 191, 0.5);
+    box-shadow: 2px 1px 30px 2px #333;
+    padding: 20px;
+}
+.my-posts{
+    font-size: 10px;
+}
+li.list-group-item{
+    color: #000;
+}
+
+.recent-text{
+    line-height: 14px;
+    padding: 0;
+}
+.recent-images{
+    padding: 0 5px 0 0;
+    height: 70px;
+    overflow: hidden;
+    position: relative
+}
+.recent-images img{
+    height: 100%;
+    max-height: 60px;
+    padding: 0 5px 0 0;
+    position: absolute;
+    left: 0;
+}
+.sub-popular-left{
+    padding: 0 0 0 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+html {
+    overflow: scroll;
+    overflow-x: hidden;
 }

@@ -13,6 +13,15 @@ use App\Reply;
 class PageController extends Controller
 {
     public function index(){
-        return view('pages.index');
+        $posts = Post::all();
+        $populars = Post::orderBy('title', 'desc')->get();
+        $recents = Post::orderBy('updated_at', 'desc')->get();
+        $categories = Category::all();
+        return view('pages.index', [
+            'posts' => $posts,
+            'populars' => $populars,
+            'categories' => $categories,
+            'recents' => $recents
+        ]);
     }
 }
