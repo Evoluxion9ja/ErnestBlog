@@ -87,37 +87,25 @@ figure.slider-figure figcaption{
     box-shadow: 2px 1px 30px 2px #333;
     padding: 20px;
 }
-.my-posts{
-    font-size: 10px;
+
+.recent-scroll{
+    height: 300px;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
-li.list-group-item{
-    color: #000;
+.recent-scroll::-webkit-scrollbar{
+    display: none;
 }
 
-.recent-text{
-    line-height: 14px;
-    padding: 0;
+.col-padding-right{
+    padding: 0 0 0 0;
 }
-.recent-images{
-    padding: 0 5px 0 0;
-    height: 70px;
-    overflow: hidden;
-    position: relative
+
+.category-scroll{
+    height: 300px;
+    overflow: auto;
 }
-.recent-images img{
-    height: 100%;
-    max-height: 60px;
-    padding: 0 5px 0 0;
-    position: absolute;
-    left: 0;
-}
-.sub-popular-left{
-    padding: 0 0 0 10px;
-}
-::-webkit-scrollbar-thumb {
-    background: #FF0000;
-}
-html {
-    overflow: scroll;
-    overflow-x: hidden;
+.category-scroll::-webkit-scrollbar{
+    display: none;
 }

@@ -24,83 +24,41 @@
                     </div>
                 </div>
             </div>
-            <div class="row preview-content" style="margin-top:10px;">
+            <hr>
+            <div class="row">
                 <div class="col-md-9">
-                        <div class="major-small"><h3>{{__('Most Read Articles')}}</h3></div>
                     <div class="row">
-                        @foreach ($posts->slice(6, 6) as $post)
-                            <div class="col-md-6"><hr>
-                                <div class="row">
-                                    <div class="col-md-4 sub-popular-left">
-                                        <img src="/storage/blog_images/{{$post->image}}" width="100%" alt="">
+                        <div class="col-md-12">
+                            <h3 class="major-small">{{__(strtoupper('Most Read Articles'))}}</h3>
+                        </div>
+                        <div class="col-md-12 recent-scroll">
+                            <div class="row">
+                                @foreach ($posts as $post)
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4 col-padding-left">
+                                                <a href=""><img src="/storage/blog_images/{{$post->image}}" width="100%" alt=""></a>
+                                            </div>
+                                            <div class="col-md-8 col-padding-right">
+                                                <span><h5><small><strong>{{$post->title}}</strong></small></h5></span>
+                                                <a href="">
+                                                    <p class="post text-justify">
+                                                        {{str_limit($post->content, 100)}}
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        <small><strong>{{strtoupper($post->title)}}</strong></small>
-                                        <p class="text-justify my-posts">{{str_limit($post->content, 250)}}</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                        @endforeach
-                    </div>
+                        </div>
+                    </div><hr>
                     <div class="row">
-                        @foreach ($categories as $category)
-                            <div class="col-md-12"> <hr/>
-                                <h3 class="major-small">
-                                    {{strtoupper($category->name)}}
-                                </h3>
-                                <div class="row">
-                                    @foreach ($category->posts as $post)
-                                        <div class="col-md-4">
-                                            <img src="/storage/blog_images/{{$post->image}}" width="100%" alt="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="major-small">{{$post->title}}</div>
-                                            <p class="text-justify">{{str_limit($post->content, 600)}}</p>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endforeach
+                        
                     </div>
                 </div>
-                <div class="col-md-3 my-sidebar">
-                    <div class="major-small text-center">
-                        <h4>Popular Articles</h4>
-                    </div>
-                    <ul class="list-group my-list-group">
-                        @foreach ($populars->take(10) as $popular)
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-md-4 recent-images">
-                                        <img src="/storage/blog_images/{{$popular->image}}" width="100%" alt="">
-                                    </div>
-                                    <div class="col-md-8 text-left recent-text">
-                                        <span><small><strong>{{$popular->title}}</strong></small></span>
-                                        <p class="text-justify"><small>{{str_limit($popular->content, 80)}}</small></p>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul><hr>
+                <div class="col-md-3">
 
-                    <div class="major-small text-center">
-                        <h4>Recently Updated Articles</h4>
-                    </div>
-                    <ul class="list-group my-list-group">
-                        @foreach ($recents->take(10) as $recent)
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-md-4 recent-images">
-                                        <img src="/storage/blog_images/{{$recent->image}}" width="100%" alt="">
-                                    </div>
-                                    <div class="col-md-8 text-left recent-text">
-                                        <span><small><strong>{{$recent->title}}</strong></small></span>
-                                        <p class="text-justify"><small>{{str_limit($recent->content, 80)}}</small></p>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
                 </div>
             </div>
         </div>
