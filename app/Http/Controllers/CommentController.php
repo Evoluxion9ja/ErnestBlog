@@ -3,60 +3,50 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\Category;
+use App\Tag;
+use App\User;
+use App\Comment;
+use App\Reply;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+   
+    public function store(Request $request, $post_id)
     {
-        //
-    }
+        
+        if(isset(auth()->user()->id)){
+            $this->validate($request, [
+                'message' => 'required|max:2000'
+            ]);
+        }else{
+            $this->validate($request, [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'message' => 'required|max:2000'
+            ]);
+        }
+        $posts = Post::find($post_id);
+        $comments = new Comment;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        if(isset(auth()->user()->id)){
+            $comments->name = auth()->user()->name;
+        }else{
+            $comments->name = $request->input('name');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if(isset(auth()->user()->id)){
+            $comments->email = auth()->user()->email;
+        }else{
+            $comments->email = $request->input('email');
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $comments->message = $request->input('message');
+        $comments->post()->associate($posts);
+        $comments->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return redirect()->route('single.index', $posts->slug)->withSuccess('Comment posted successfully');
     }
 
     /**

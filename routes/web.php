@@ -90,6 +90,22 @@ Route::match(['DELETE'], 'publish/{id}', [
     'as' => 'publish.destroy'
 ]);
 
+//Route For Comments
+Route::match(['GET', 'POST'], 'comment/{post_id}', [
+    'uses' => 'CommentController@store',
+    'as' => 'comment.store'
+]);
+
+Route::match(['PUT'], 'comment/{id}', [
+    'uses' => 'CommentController@update',
+    'as' => 'comment.update'
+]);
+
+Route::match(['DELETE'], 'comment/{id}', [
+    'uses' => 'CommentController@destroy',
+    'as' => 'comment.destory'
+]);
+
 
 Auth::routes();
 
