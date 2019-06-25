@@ -15,13 +15,15 @@ class PageController extends Controller
     public function index(){
         $posts = Post::all();
         $populars = Post::orderBy('title', 'desc')->get();
-        $recents = Post::orderBy('updated_at', 'desc')->get();
+        $recents = Post::orderBy('id', 'asc')->get();
         $categories = Category::all();
+        $updates = Post::orderBy('updated_at', 'desc')->get();
         return view('pages.index', [
             'posts' => $posts,
             'populars' => $populars,
             'categories' => $categories,
-            'recents' => $recents
+            'recents' => $recents,
+            'updates' => $updates
         ]);
     }
 }

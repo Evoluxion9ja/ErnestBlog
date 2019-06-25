@@ -109,3 +109,19 @@ figure.slider-figure figcaption{
 .category-scroll::-webkit-scrollbar{
     display: none;
 }
+
+.sidebar-post{
+    font-size: 12px;
+    line-height: 14px;
+}
+.sidebar-list{
+    height: 600px;
+    overflow: auto;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.sidebar-list::-webkit-scrollbar{
+    display: none;
+}
