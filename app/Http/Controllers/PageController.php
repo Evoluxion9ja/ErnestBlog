@@ -26,4 +26,11 @@ class PageController extends Controller
             'updates' => $updates
         ]);
     }
+    
+    public function single($slug){
+        $posts = Post::where('slug', '=', $slug)->first();
+        return view('pages.single',[
+            'posts' => $posts
+        ]);
+    }
 }

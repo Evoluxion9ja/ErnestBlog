@@ -15,6 +15,14 @@ Route::match(['GET', 'POST'], '/', [
     'uses' => 'PageController@index',
     'as' => '/'
 ]);
+Route::match(['GET', 'POST'], '/articles', [
+    'uses' => 'PageController@index',
+    'as' => 'article.index'
+]);
+Route::match(['GET', 'POST'], 'articles/{slug}',[
+    'uses' => 'PageController@single',
+    'as' => 'single.index'
+])->where('slug', '[\w\ \d\-\_]+');
 
 //Category Route
 Route::match(['GET', 'POST'], '/categories', [
@@ -81,6 +89,7 @@ Route::match(['DELETE'], 'publish/{id}', [
     'uses' => 'PostController@destroy',
     'as' => 'publish.destroy'
 ]);
+
 
 Auth::routes();
 

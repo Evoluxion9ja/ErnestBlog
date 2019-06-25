@@ -5,8 +5,10 @@
 }
 body{
     background: #000;
-    font-family: "Raleway"
+    font-family: "Raleway";
+    overflow-y: auto;
 }
+
 ul li{
     list-style: none;
 }
@@ -124,4 +126,14 @@ figure.slider-figure figcaption{
 
 .sidebar-list::-webkit-scrollbar{
     display: none;
+}
+
+a{
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #333;
 }

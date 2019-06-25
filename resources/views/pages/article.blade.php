@@ -8,7 +8,7 @@
                     <div class="slider card">
                         <figure class="slider-figure">
                             @foreach ($posts->take(1) as $post)
-                                <a href="{{url('articles/'.$post->slug)}}">
+                                <a href="{{url('/articles'.$posts->slug)}}">
                                     <img src="/storage/blog_images/{{$post->image}}" width="100%" alt="">
                                 </a>
                                 <figcaption>
@@ -17,9 +17,9 @@
                                         <span>Written By: <strong>{{strtoupper($post->user->name)}}</strong></span> &ensp;|&ensp;
                                         <span>Written On: <strong>{{date('M j, Y', strtotime($post->created_at))}} | {{$post->created_at->diffForHumans()}}</strong></span>
                                     </div><hr>
-                                    <h3><a href="{{url('articles/'.$post->slug)}}">{{strtoupper($post->title)}}</a></h3>
-                                    <p class="text-justify"><a href="{{url('articles/'.$post->slug)}}">{{str_limit($post->content, 400)}}</a></p>
-                                    <a href="{{url('articles/'.$post->slug)}}" class="btn btn-primary btn-md">Continue Reading</a>
+                                    <h3>{{strtoupper($post->title)}}</h3>
+                                    <p class="text-justify">{{str_limit($post->content, 400)}}</p>
+                                    <a href="" class="btn btn-primary btn-md">Continue Reading</a>
                                 </figcaption>
                             @endforeach
                         </figure>
@@ -38,22 +38,18 @@
                                 @foreach ($posts as $post)
                                     <div class="col-md-6">
                                         <div class="row">
-                                            <div class="col-md-12"><hr>
-                                                <div class="row">
-                                                        <div class="col-md-4 col-padding-left">
-                                                                <a href="{{url('articles/'.$post->slug)}}">
-                                                                    <img src="/storage/blog_images/{{$post->image}}" width="100%" alt="">
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-md-8 col-padding-right">
-                                                                <a href="{{url('articles/'.$post->slug)}}">
-                                                                    <strong>{{strtoupper($post->title)}}</strong>
-                                                                    <p class="post text-justify">
-                                                                        {{str_limit($post->content, 150)}}
-                                                                    </p>
-                                                                </a>
-                                                            </div>
-                                                </div>
+                                            <div class="col-md-4 col-padding-left">
+                                                <a href="">
+                                                    <img src="/storage/blog_images/{{$post->image}}" width="100%" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="col-md-8 col-padding-right">
+                                                <a href="">
+                                                    <strong>{{strtoupper($post->title)}}</strong>
+                                                    <p class="post text-justify">
+                                                        {{str_limit($post->content, 400)}}
+                                                    </p>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -72,12 +68,12 @@
                                         <div class="col-md-12" style="margin-bottom: 20px;">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <a href="{{url('articles/'.$post->slug)}}"><img src="/storage/blog_images/{{$post->image}}" width="100%" alt=""></a>
+                                                    <a href=""><img src="/storage/blog_images/{{$post->image}}" width="100%" alt=""></a>
                                                 </div>
                                                 <div class="col-md-8 col-padding-right">
-                                                    <span><strong><a href="{{url('articles/'.$post->slug)}}">{{strtoupper($post->title)}}</a></strong></span><hr>
+                                                    <span><strong><a href="">{{strtoupper($post->title)}}</a></strong></span><hr>
                                                     <p class="post text-justify">
-                                                        <a href="{{url('articles/'.$post->slug)}}">{{str_limit($post->content, 400)}}</a>
+                                                        <a href="">{{str_limit($post->content, 400)}}</a>
                                                     </p>
                                                 </div>
                                             </div>
@@ -96,7 +92,7 @@
                         <div class="col-md-12">
                             <ul class="list-group sidebar-list">
                                 @foreach ($recents as $recent)
-                                    <a href="{{url('articles/'.$post->slug)}}">
+                                    <a href="">
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-md-4" style="padding-right:5px; padding-left:0;padding-top:0">
@@ -122,7 +118,7 @@
                             <div class="col-md-12">
                                 <ul class="list-group sidebar-list">
                                     @foreach ($updates as $update)
-                                        <a href="{{url('articles/'.$post->slug)}}">
+                                        <a href="">
                                             <li class="list-group-item">
                                                 <div class="row">
                                                     <div class="col-md-4" style="padding-right:5px; padding-left:0;padding-top:0">
