@@ -58,7 +58,15 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'message' => 'required|max:2000'
+        ]);
+
+        $comments = Comment::find($id);
+        $comments->message = $request->input('message');
+        $comments->save();
+
+        return redirect()->route('single.index', $comments->post->slug)->withSuccess('Comment updated successfully');
     }
 
     /**
@@ -69,6 +77,11 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comments = Comment::find($id);
+        $post_id = $comments->post->slug;
+
+        $comments->delete();
+
+        return redirect()->route('single.index', $post_id)->withSuccess('comment successfully deleted');
     }
 }

@@ -106,6 +106,22 @@ Route::match(['DELETE'], 'comment/{id}', [
     'as' => 'comment.destory'
 ]);
 
+//Route For Replies
+Route::match(['GET', 'POST'], 'reply/{comment_id}', [
+    'uses' => 'ReplyController@store',
+    'as' => 'reply.store'
+]);
+
+Route::match(['PUT'], 'reply/{id}', [
+    'uses' => 'ReplyController@update',
+    'as' => 'reply.update'
+]);
+
+Route::match(['DELETE'], 'reply/{id}', [
+    'uses' => 'ReplyController@destroy',
+    'as' => 'reply.destory'
+]);
+
 
 Auth::routes();
 
