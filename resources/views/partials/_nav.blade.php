@@ -13,24 +13,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('/') }}"><small><strong>{{ strtoupper(__('Home')) }}</strong></small></a>
                 </li><span class="divide-line"></span>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><small><strong>{{ strtoupper(__('Economics')) }}</strong></small></a>
-                </li><span class="divide-line"></span>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><small><strong>{{ strtoupper(__('People')) }}</strong></small></a>
-                </li><span class="divide-line"></span>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><small><strong>{{ strtoupper(__('Biography')) }}</strong></small></a>
-                </li><span class="divide-line"></span>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><small><strong>{{ strtoupper(__('Sports')) }}</strong></small></a>
-                </li><span class="divide-line"></span>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><small><strong>{{ strtoupper(__('Entertainment')) }}</strong></small></a>
-                </li><span class="divide-line"></span>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><small><strong>{{ strtoupper(__('Happening')) }}</strong></small></a>
-                </li>
+                @foreach ($categories as $category)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('category.show', $category->id)}}"><small><strong>{{ strtoupper(__($category->name)) }}</strong></small></a>
+                    </li><span class="divide-line"></span>
+                @endforeach
             </ul>
 
             <!-- Right Side Of Navbar -->
