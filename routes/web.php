@@ -122,6 +122,25 @@ Route::match(['DELETE'], 'reply/{id}', [
     'as' => 'reply.destory'
 ]);
 
+//Image Route
+Route::match(['GET', 'POST'], '/image-view',[
+    'uses' => 'ImageController@index',
+    'as' => 'image.upload'
+]);
+
+Route::match(['GET', 'POST'], '/image-submit', [
+    'uses' => 'ImageController@store',
+    'as' => 'image.store'
+]);
+
+Route::match(['GET', 'POST'], '/form', [
+    'uses' => 'FormController@index',
+    'as' => 'form.upload'
+]);
+Route::match(['GET', 'POST'], 'form/store', [
+    'uses' => 'FormController@store',
+    'as' => 'form.store'
+]);
 
 Auth::routes();
 
